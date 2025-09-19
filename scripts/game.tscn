@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://c7pkr51ujncql"]
+[gd_scene load_steps=9 format=3 uid="uid://c7pkr51ujncql"]
 
 [ext_resource type="PackedScene" uid="uid://cn1rbfm1ug250" path="res://scenes/player.tscn" id="1_21or3"]
+[ext_resource type="PackedScene" uid="uid://dr2ipiayf3qjy" path="res://scenes/platform.tscn" id="2_58a3d"]
 [ext_resource type="Texture2D" uid="uid://bobq45exctr30" path="res://assets/sprites/world_tileset.png" id="2_ekttx"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_58a3d"]
@@ -157,16 +158,68 @@ texture = ExtResource("2_ekttx")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_58a3d")
 
+[sub_resource type="Animation" id="Animation_58a3d"]
+resource_name = "move"
+length = 1.5
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(400, 20), Vector2(508, 20)]
+}
+
+[sub_resource type="Animation" id="Animation_ljdu6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(400, 20)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jwaa1"]
+_data = {
+&"RESET": SubResource("Animation_ljdu6"),
+&"move": SubResource("Animation_58a3d")
+}
+
 [node name="Game" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_21or3")]
+z_index = 5
 position = Vector2(41, 48)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(-14, -13)
 zoom = Vector2(4, 4)
+position_smoothing_enabled = true
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_ljdu6")
 format = 2
 layer_0/tile_data = PackedInt32Array(196610, 0, 0, 196611, 0, 0, 196612, 0, 0, 196613, 0, 0, 196614, 0, 0, 196615, 0, 0, 196616, 0, 0, 196617, 0, 0, 131081, 65536, 0, 65545, 65536, 0, 65546, 65536, 0, 65547, 65536, 0, 9, 131072, 0, 10, 131072, 0, 11, 131072, 0, 12, 131072, 0, 65548, 131072, 0, 65549, 131072, 0, 65550, 131072, 0, -196596, 131072, 4, -65524, 196608, 7, 65551, 589824, 0, 65552, 655360, 0, 65553, 655360, 0, 65554, 720896, 0, 65556, 0, 0, 65557, 0, 0, 65558, 0, 0, 65559, 0, 0, 65555, 0, 0, 262143, 0, 0, 196607, 0, 0, 196606, 0, 0, 196605, 0, 0, 196604, 0, 0, -3, 327680, 3, 65533, 327680, 4, 131069, 327680, 5, -2, 327680, 3, 65534, 327680, 4, 131070, 327680, 5, -1, 327680, 4, 65535, 327680, 4, 131071, 327680, 5, -262145, 327680, 3, -65537, 327680, 4, -131073, 327680, 4, -196609, 327680, 4)
+
+[node name="Platform" parent="." instance=ExtResource("2_58a3d")]
+position = Vector2(84, 6)
+
+[node name="Platform2" parent="." instance=ExtResource("2_58a3d")]
+position = Vector2(400, 20)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Platform2"]
+libraries = {
+&"": SubResource("AnimationLibrary_jwaa1")
+}
+autoplay = "move"
