@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://c7pkr51ujncql"]
+[gd_scene load_steps=10 format=3 uid="uid://c7pkr51ujncql"]
 
 [ext_resource type="PackedScene" uid="uid://cn1rbfm1ug250" path="res://scenes/player.tscn" id="1_21or3"]
-[ext_resource type="PackedScene" uid="uid://dr2ipiayf3qjy" path="res://scenes/platform.tscn" id="2_58a3d"]
+[ext_resource type="PackedScene" uid="uid://ddestdapa7sy7" path="res://scenes/platform.tscn" id="2_58a3d"]
 [ext_resource type="Texture2D" uid="uid://bobq45exctr30" path="res://assets/sprites/world_tileset.png" id="2_ekttx"]
+[ext_resource type="PackedScene" uid="uid://bs16vib8427m8" path="res://scenes/coin.tscn" id="4_ljdu6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_58a3d"]
 texture = ExtResource("2_ekttx")
@@ -158,6 +159,21 @@ texture = ExtResource("2_ekttx")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_58a3d")
 
+[sub_resource type="Animation" id="Animation_ljdu6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(400, 20)]
+}
+
 [sub_resource type="Animation" id="Animation_58a3d"]
 resource_name = "move"
 length = 1.5
@@ -173,21 +189,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(400, 20), Vector2(508, 20)]
-}
-
-[sub_resource type="Animation" id="Animation_ljdu6"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(400, 20)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jwaa1"]
@@ -223,3 +224,12 @@ libraries = {
 &"": SubResource("AnimationLibrary_jwaa1")
 }
 autoplay = "move"
+
+[node name="Coin" parent="." instance=ExtResource("4_ljdu6")]
+position = Vector2(68, 44)
+
+[node name="Coin3" parent="." instance=ExtResource("4_ljdu6")]
+position = Vector2(430, 23)
+
+[node name="Coin2" parent="." instance=ExtResource("4_ljdu6")]
+position = Vector2(223, 11)
