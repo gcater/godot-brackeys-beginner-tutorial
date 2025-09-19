@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://c7pkr51ujncql"]
+[gd_scene load_steps=12 format=3 uid="uid://c7pkr51ujncql"]
 
 [ext_resource type="PackedScene" uid="uid://cn1rbfm1ug250" path="res://scenes/player.tscn" id="1_21or3"]
 [ext_resource type="PackedScene" uid="uid://ddestdapa7sy7" path="res://scenes/platform.tscn" id="2_58a3d"]
 [ext_resource type="Texture2D" uid="uid://bobq45exctr30" path="res://assets/sprites/world_tileset.png" id="2_ekttx"]
 [ext_resource type="PackedScene" uid="uid://bs16vib8427m8" path="res://scenes/coin.tscn" id="4_ljdu6"]
+[ext_resource type="PackedScene" uid="uid://be1y5a07vucnr" path="res://scenes/killzone.tscn" id="5_jwaa1"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_58a3d"]
 texture = ExtResource("2_ekttx")
@@ -197,6 +198,8 @@ _data = {
 &"move": SubResource("Animation_58a3d")
 }
 
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_e48sv"]
+
 [node name="Game" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_21or3")]
@@ -206,6 +209,7 @@ position = Vector2(41, 48)
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(-14, -13)
 zoom = Vector2(4, 4)
+limit_bottom = 120
 position_smoothing_enabled = true
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -225,11 +229,19 @@ libraries = {
 }
 autoplay = "move"
 
-[node name="Coin" parent="." instance=ExtResource("4_ljdu6")]
+[node name="Killzone" parent="." instance=ExtResource("5_jwaa1")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
+position = Vector2(-17, 114)
+shape = SubResource("WorldBoundaryShape2D_e48sv")
+
+[node name="Coins" type="Node" parent="."]
+
+[node name="Coin" parent="Coins" instance=ExtResource("4_ljdu6")]
 position = Vector2(68, 44)
 
-[node name="Coin3" parent="." instance=ExtResource("4_ljdu6")]
+[node name="Coin3" parent="Coins" instance=ExtResource("4_ljdu6")]
 position = Vector2(430, 23)
 
-[node name="Coin2" parent="." instance=ExtResource("4_ljdu6")]
+[node name="Coin2" parent="Coins" instance=ExtResource("4_ljdu6")]
 position = Vector2(223, 11)
