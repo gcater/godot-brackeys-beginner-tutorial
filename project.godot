@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Brackeys Godot Beginner Tutorial"
-run/main_scene="uid://c7pkr51ujncql"
+run/main_scene="uid://b04o48iylgm40"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
