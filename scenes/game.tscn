@@ -1,7 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://b04o48iylgm40"]
+[gd_scene load_steps=16 format=3 uid="uid://b04o48iylgm40"]
 
-[ext_resource type="Script" uid="uid://hjvd1yft7x3" path="res://scenes/game_manager.gd" id="1_gee14"]
+[ext_resource type="Script" path="res://scenes/game_manager.gd" id="1_gee14"]
 [ext_resource type="PackedScene" uid="uid://cn1rbfm1ug250" path="res://scenes/player.tscn" id="1_p57ef"]
+[ext_resource type="FontFile" uid="uid://dho42kkhhtwot" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="2_0tnpc"]
 [ext_resource type="Texture2D" uid="uid://bobq45exctr30" path="res://assets/sprites/world_tileset.png" id="2_u5sy4"]
 [ext_resource type="PackedScene" uid="uid://be1y5a07vucnr" path="res://scenes/killzone.tscn" id="3_gee14"]
 [ext_resource type="PackedScene" uid="uid://bs16vib8427m8" path="res://scenes/coin.tscn" id="4_0tnpc"]
@@ -214,12 +215,14 @@ offset_left = -177.0
 offset_top = -35.0
 offset_right = -137.0
 offset_bottom = -12.0
+theme_override_fonts/font = ExtResource("2_0tnpc")
 
 [node name="Player" parent="." instance=ExtResource("1_p57ef")]
 z_index = 5
 position = Vector2(-56, 32)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
+visible = false
 position = Vector2(-14, -13)
 zoom = Vector2(4, 4)
 process_callback = 0
